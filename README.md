@@ -1,4 +1,4 @@
-gsm-cell-tracker-android
+lost-phone-tracker-app
 ========================
 
-GSM cell tracker for Android - if your phone has been stolen
+Phone tracker for Android - if your phone has been stolen
