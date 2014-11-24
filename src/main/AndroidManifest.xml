@@ -5,6 +5,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <permission
+        android:name="at.fhj.ase13.mobcomp2.phonetracker.TRIGGER_ALARM"
+        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
@@ -39,6 +44,9 @@
             android:name="at.fhj.ase13.mobcomp2.phonetracker.LogAlarmReceiver"
             android:enabled="true"
             android:exported="true" >
+            <intent-filter>
+                <action android:name="at.fhj.ase13.mobcomp2.phonetracker.TRIGGER_ALARM" />
+            </intent-filter>
         </receiver>
     </application>
 
