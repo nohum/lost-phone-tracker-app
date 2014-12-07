@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/list_element_padding"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:clickable="true"
         android:background="@drawable/list_element">
 
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Enter password to start tracking" />
+            android:text="@string/enter_password_start" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Enter password to stop tracking" />
+            android:text="@string/enter_password_stop" />
     </LinearLayout>
 
 </LinearLayout>

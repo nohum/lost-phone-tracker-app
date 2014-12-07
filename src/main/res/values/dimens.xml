@@ -3,5 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="dialog_horizontal_margin">10dp</dimen>
+    <dimen name="dialog_vertical_margin">12dp</dimen>
+
     <dimen name="list_element_padding">10dp</dimen>
 </resources>

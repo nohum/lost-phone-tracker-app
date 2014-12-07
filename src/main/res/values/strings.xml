@@ -4,5 +4,7 @@
     <string name="app_name">Phone Tracker</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="enter_password_start">Enter password to start tracking</string>
+    <string name="enter_password_stop">Enter password to stop tracking</string>
 
 </resources>
