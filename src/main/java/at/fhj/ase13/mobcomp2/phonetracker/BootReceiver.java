@@ -3,6 +3,7 @@ package at.fhj.ase13.mobcomp2.phonetracker;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class BootReceiver extends BroadcastReceiver {
 
@@ -20,6 +21,7 @@ public class BootReceiver extends BroadcastReceiver {
             String receiver = new PreferenceManager(context).getReportReceiver();
 
             if (receiver != null) {
+                Log.d("PT:BootReceiver", "restarting reporting");
                 LogAlarmReceiver.startAlarm(context, receiver);
             }
         }

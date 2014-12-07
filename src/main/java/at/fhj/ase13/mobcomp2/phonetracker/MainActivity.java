@@ -27,7 +27,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * @param context
      */
     public static void enableActivity(Context context) {
-        ComponentName componentName = new ComponentName(context, MainActivity.class.getSimpleName());
+        ComponentName componentName = new ComponentName(context, "MainActivity");
 
         context.getPackageManager().setComponentEnabledSetting(componentName,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * @param context
      */
     public static void disableActivity(Context context) {
-        ComponentName componentName = new ComponentName(context, MainActivity.class.getSimpleName());
+        ComponentName componentName = new ComponentName(context, "MainActivity");
 
         context.getPackageManager().setComponentEnabledSetting(componentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
@@ -48,7 +48,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public static boolean isEnabled(Context context) {
-        ComponentName componentName = new ComponentName(context, MainActivity.class.getSimpleName());
+        ComponentName componentName = new ComponentName(context, "MainActivity");
 
         return context.getPackageManager().getComponentEnabledSetting(componentName)
                 != PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
