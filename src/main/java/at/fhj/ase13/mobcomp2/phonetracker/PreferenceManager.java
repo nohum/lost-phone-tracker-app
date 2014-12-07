@@ -16,6 +16,8 @@ public class PreferenceManager {
 
     private static final String KEY_STOP_PASSWORD = "stop_password";
 
+    private static final String KEY_REPORT_RECEIVER_NUMBER = "report_receiver";
+
     private Context context;
 
     private final SharedPreferences prefs;
@@ -53,6 +55,16 @@ public class PreferenceManager {
         }
 
         return hashed.equals(generateHash(password));
+    }
+
+    public void setReportReceiver(String number) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_REPORT_RECEIVER_NUMBER, number);
+        editor.apply();
+    }
+
+    public String getReportReceiver() {
+        return prefs.getString(KEY_REPORT_RECEIVER_NUMBER, null);
     }
 
     private String generateHash(String password) {

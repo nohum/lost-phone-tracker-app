@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 public class BootReceiver extends BroadcastReceiver {
+
     public BootReceiver() {
     }
 
@@ -16,8 +17,11 @@ public class BootReceiver extends BroadcastReceiver {
 
         // if the main activity is disabled (= hidden), the tracking should currently active
         if (!MainActivity.isEnabled(context)) {
-            // TODO get phonenumber from somewhere
-            LogAlarmReceiver.startAlarm(context, null);
+            String receiver = new PreferenceManager(context).getReportReceiver();
+
+            if (receiver != null) {
+                LogAlarmReceiver.startAlarm(context, receiver);
+            }
         }
     }
 }

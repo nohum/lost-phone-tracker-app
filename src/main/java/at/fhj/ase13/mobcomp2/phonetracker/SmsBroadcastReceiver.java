@@ -39,6 +39,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                     // hide activity to prevent changing passwords
                     MainActivity.disableActivity(context);
                     LogAlarmReceiver.startAlarm(context, sender);
+                    prefs.setReportReceiver(sender);
                     abort = true;
 
                     break;
