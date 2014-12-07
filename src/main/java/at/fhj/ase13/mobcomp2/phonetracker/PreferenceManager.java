@@ -19,7 +19,7 @@ public class PreferenceManager {
     }
 
     public boolean isStartPasswordCorrect(String password) {
-        return false;
+        return true;
     }
 
     public boolean isStopPasswordCorrect(String password) {
