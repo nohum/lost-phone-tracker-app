@@ -34,8 +34,8 @@ public class LogAlarmReceiver extends BroadcastReceiver {
         pendingTrigger = PendingIntent.getBroadcast(context, 0, intent, 0);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + ALARM_TIME, ALARM_TIME, pendingTrigger);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + ALARM_TIME, pendingTrigger);
     }
 
     public static synchronized void stopAlarm(Context context) {
@@ -46,6 +46,7 @@ public class LogAlarmReceiver extends BroadcastReceiver {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingTrigger);
 
+        pendingTrigger.cancel();
         pendingTrigger = null;
     }
 
@@ -63,5 +64,8 @@ public class LogAlarmReceiver extends BroadcastReceiver {
         SmsLocationReporter sender = new SmsLocationReporter(context,
                 intent.getStringExtra(EXTRA_PHONE_NUMBER));
         sender.report();
+
+        // reschedule the alarm after the SMS has been sent
+        enqueueAlarm(context, intent.getStringExtra(EXTRA_PHONE_NUMBER));
     }
 }
