@@ -3,7 +3,10 @@ package at.fhj.ase13.mobcomp2.phonetracker;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 
 public class SmsBroadcastReceiver extends BroadcastReceiver {
@@ -32,7 +35,11 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                 String body = message.getMessageBody();
 
                 if (prefs.isStartPasswordCorrect(body)) {
-                    LogAlarmReceiver.startAlarm(context, sender);
+//                    LogAlarmReceiver.startAlarm(context, sender);
+
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(sender, null, body, null, null);
+
                     abort = true;
 
                     break;
@@ -45,8 +52,18 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
             }
 
             if (abort) {
-                // FIXME is not working under KITKAT anymore
+                // this is not working under KITKAT anymore
                 abortBroadcast();
+
+                // as a hack, disable sound and vibration to hide the incoming SMS notification from any possible thief
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+
+                    audioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
+                    audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER, AudioManager.VIBRATE_SETTING_OFF);
+                    audioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_NOTIFICATION,
+                            AudioManager.VIBRATE_SETTING_OFF);
+                }
             }
         }
     }
