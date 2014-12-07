@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="at.fhj.ase13.mobcomp2.phonetracker.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -28,22 +28,27 @@
         </activity>
 
         <receiver
-            android:name="at.fhj.ase13.mobcomp2.phonetracker.SmsBroadcastReceiver"
+            android:name=".SmsBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.BROADCAST_SMS"> <!-- BROADCAST_SMS permission denies other apps spoofing this intent and sending it to us -->
-            <!--  Enabling SMS support in Hangouts 2.0 breaks the BroadcastReceiver of SMS_RECEIVED if the priority is not higher than the default. -->
-            <intent-filter android:priority="500">
+            android:permission="android.permission.BROADCAST_SMS" > <!-- BROADCAST_SMS permission denies other apps spoofing this intent and sending it to us -->
+            <!-- Enabling SMS support in Hangouts 2.0 breaks the BroadcastReceiver of SMS_RECEIVED if the priority is not higher than the default. -->
+            <intent-filter android:priority="500" >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="at.fhj.ase13.mobcomp2.phonetracker.LogAlarmReceiver"
+            android:name=".LogAlarmReceiver"
             android:enabled="true"
             android:exported="false" >
             <intent-filter>
                 <action android:name="at.fhj.ase13.mobcomp2.phonetracker.TRIGGER_ALARM" />
             </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="false" >
         </receiver>
     </application>
 

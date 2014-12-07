@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -46,6 +45,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         context.getPackageManager().setComponentEnabledSetting(componentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
+    }
+
+    public static boolean isEnabled(Context context) {
+        ComponentName componentName = new ComponentName(context, MainActivity.class.getSimpleName());
+
+        return context.getPackageManager().getComponentEnabledSetting(componentName)
+                != PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
     }
 
     /**
