@@ -2,7 +2,6 @@ package at.fhj.ase13.mobcomp2.phonetracker;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.Settings;
 
@@ -17,7 +16,9 @@ public class GpsToggler {
 
         if (!provider.contains("gps")) { // if gps is disabled
             final Intent poke = new Intent();
-            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+
+            poke.setClassName("com.android.settings",
+                    "com.android.settings.widget.SettingsAppWidgetProvider");
             poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
             poke.setData(Uri.parse("3"));
             context. sendBroadcast(poke);
@@ -30,16 +31,12 @@ public class GpsToggler {
 
         if (provider.contains("gps")) { // if gps is enabled
             final Intent poke = new Intent();
-            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+
+            poke.setClassName("com.android.settings",
+                    "com.android.settings.widget.SettingsAppWidgetProvider");
             poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
             poke.setData(Uri.parse("3"));
             context.sendBroadcast(poke);
         }
-    }
-
-    public static boolean isGpsEnabled(Context context) {
-        LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
-        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 }

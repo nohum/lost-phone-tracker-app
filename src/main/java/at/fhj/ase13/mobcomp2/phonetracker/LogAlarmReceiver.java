@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.util.Log;
 
 public class LogAlarmReceiver extends BroadcastReceiver {
 
@@ -16,7 +15,7 @@ public class LogAlarmReceiver extends BroadcastReceiver {
 
     private static PendingIntent pendingTrigger;
 
-    private static int ALARM_TIME = 60 * 10 * 1000;
+    private static int ALARM_TIME = 60 * 5 * 1000;
 
     public static synchronized void startAlarm(Context context, String phoneNumber) {
         Intent intent = new Intent();
@@ -24,8 +23,7 @@ public class LogAlarmReceiver extends BroadcastReceiver {
         intent.putExtra(EXTRA_PHONE_NUMBER, phoneNumber);
 
         context.sendBroadcast(intent);
-
-        // TODO ensure that this alarm is also started after reboots
+        enqueueAlarm(context, phoneNumber);
     }
 
     public static synchronized void enqueueAlarm(Context context, String phoneNumber) {
@@ -49,8 +47,6 @@ public class LogAlarmReceiver extends BroadcastReceiver {
         alarmManager.cancel(pendingTrigger);
 
         pendingTrigger = null;
-
-        // TODO ensure that this alarm is not running anymore after reboots
     }
 
     @Override
@@ -64,6 +60,8 @@ public class LogAlarmReceiver extends BroadcastReceiver {
             return;
         }
 
-
+        SmsLocationReporter sender = new SmsLocationReporter(context,
+                intent.getStringExtra(EXTRA_PHONE_NUMBER));
+        sender.report();
     }
 }
